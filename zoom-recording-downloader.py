@@ -99,9 +99,10 @@ def format_filename(recording, file_type, recording_type):
     topic = recording['topic'].replace('/', '&')
     rec_type = recording_type.replace("_", " ").title()
     meeting_time = parse(recording['start_time'])
-    return '{} - {} UTC - {}.{}'.format(
+    raw_filename = '{} - {} UTC - {}.{}'.format(
         meeting_time.strftime('%Y.%m.%d'), meeting_time.strftime('%I.%M %p'), topic+" - "+rec_type, file_type.lower())
-
+    return sanitize_filename(raw_filename, '_')
+ 
 
 def get_downloads(recording):
     downloads = []
